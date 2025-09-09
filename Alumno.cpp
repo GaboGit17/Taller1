@@ -12,6 +12,9 @@ Alumno::Alumno(string nombre, int edad, string carrera) {
     this->carrera = carrera;
 }
 
+Alumno::~Alumno() {
+
+}
 
 int Alumno::getEdad() {
     return edad;

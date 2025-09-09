@@ -2,12 +2,112 @@
 // Created by gabri on 03-09-2025.
 //
 
+#include <iostream>
+#include <ostream>
+
 #include "Alumno.h"
-Alumno* a1 = new Alumno("gabo", 33, "icci");
+
+
+void manejarAlumnos() {
+    bool salir = false;
+    while (!salir) {
+        cout << "1. Crear un alumno con todos sus datos\n";
+        cout << "2. Buscar un alumno ID o nombre y listar su informacion\n";
+        cout << "3. Eliminar un alumno del sistema utilizando su ID\n";
+        cout << "0. Salir\n";
+        int opcion;
+        cout << "Selecciona opcion:" << endl;
+        cin >> opcion;
+        while (opcion < 0 || opcion > 3) {
+            cout << "Opcion invalida" << endl;
+            cout << "Selecciona opcion:" << endl;
+            cin >> opcion;
+        }
+
+        switch (opcion) {
+
+            case 1:
+                cout << "Ingresa el nombre del alumno:\n" << endl;
+                break;
+            case 2:
+                cout << "Ingrese ID" << endl;
+                break;
+            case 3:
+                break;
+            case 0:
+                salir = true;
+                cout << "Saliendo de menu alumno..." << endl;
+                break;
+
+        }
+
+    }
+
+
+}
+
+void manejarInscripciones() {
+
+}
+
+void manejarCursos() {
+
+}
+
+void manejarNotas() {
+
+}
+
+void consultasReportes() {
+
+}
 
 int main(){
+    bool salir = false;
+    while (!salir) {
+        cout << "Menu general" << endl;
+        cout << "1. Manejo de Alumnos" << endl;
+        cout << "2. Manejo de cursos" << endl;
+        cout << "3. Manejo de Inscripciones" << endl;
+        cout << "4. Manejo de notas" << endl;
+        cout << "5. Consultas y reportes" << endl;
+        cout << "0. Salir" << endl;
 
-    a1->mostrar();
+        int opcion;
+        cout << "Selecciona opcion:" << endl;
+        cin >> opcion;
+        while (opcion < 0 || opcion > 5) {
+            cout << "Opcion invalida" << endl;
+            cout << "Selecciona opcion:" << endl;
+            cin >> opcion;
+        }
+
+
+        switch (opcion) {
+            case 1:
+                manejarAlumnos();
+                break;
+            case 3:
+                manejarInscripciones();
+                break;
+            case 2:
+                manejarCursos();
+                break;
+            case 4:
+                manejarNotas();
+                break;
+            case 5:
+                consultasReportes();
+                break;
+            case 0:
+                salir = true;
+                cout << " Saliendo...\n";
+
+        }
+
+    }
+
+    cout <<  "salimos " << endl;
 
     return 0;
 };
