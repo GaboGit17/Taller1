@@ -8,27 +8,36 @@
 using namespace std;
 
 class Alumno {
-    private:
+private:
+    int id;
+    string nombre;
+    string apellido;
+    string carrera;
+    string fechaIngreso;
 
-        string nombre;
-        int edad;
-        string carrera;
-    public:
+public:
+    // Constructor
+    Alumno(int id, string nombre, string apellido, string carrera, string fechaIngreso);
 
-        Alumno(string nombre, int edad, string carrera);
-        string getNombre();
-        int getEdad();
-        string getCarrera();
-
-        void setEdad(int edad);
-
-        void setNombre(string nombre);
-
-        void setCarrera(string carrera);
-
-        void mostrar();
-
+    // Destructor
     ~Alumno();
+
+    // Getters
+    int getId();
+    string getNombre();
+    string getApellido();
+    string getCarrera();
+    string getFechaIngreso();
+
+    // Setters
+    void setId(int id);
+    void setNombre(string nombre);
+    void setApellido(string apellido);
+    void setCarrera(string carrera);
+    void setFechaIngreso(string fechaIngreso);
+
+    // Mostrar información
+    void mostrar();
 };
 
 

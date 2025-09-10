@@ -6,7 +6,8 @@
 #include <ostream>
 
 #include "Alumno.h"
-
+#include "ListAlumnos.h"
+ListAlumnos lista;
 
 void manejarAlumnos() {
     bool salir = false;
@@ -26,14 +27,45 @@ void manejarAlumnos() {
 
         switch (opcion) {
 
-            case 1:
-                cout << "Ingresa el nombre del alumno:\n" << endl;
+            case 1: {
+                int id;
+                string nombre, apellido, carrera, fechaIngreso;
+
+                cout << "Ingresa el ID del alumno: ";
+                cin >> id;
+
+                cout << "Ingresa el nombre del alumno: ";
+                cin >> nombre;
+
+                cout << "Ingresa el apellido del alumno: ";
+                cin >> apellido;
+
+                cout << "Ingresa la carrera del alumno: ";
+                cin >> carrera;
+
+                cout << "Ingresa la fecha de ingreso (D-M-A): ";
+                cin >> fechaIngreso;
+                Alumno nuevo(id, nombre, apellido, carrera, fechaIngreso);
+                lista.insertar(nuevo);
+
                 break;
-            case 2:
+            }
+            case 2: {
+                int id;
                 cout << "Ingrese ID" << endl;
+                cin >> id;
+                lista.recorrer(id);
+
                 break;
-            case 3:
+            }
+            case 3: {
+                int id;
+                cout << "Ingrese ID" << endl;
+                cin >> id;
+                lista.eliminar(id);
+
                 break;
+            }
             case 0:
                 salir = true;
                 cout << "Saliendo de menu alumno..." << endl;

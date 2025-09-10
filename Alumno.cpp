@@ -6,48 +6,43 @@
 #include <iostream>
 using namespace std;
 
-Alumno::Alumno(string nombre, int edad, string carrera) {
-    this->edad = edad;
+#include "Alumno.h"
+
+// Constructor
+Alumno::Alumno(int id, string nombre, string apellido, string carrera, string fechaIngreso) {
+    this->id = id;
     this->nombre = nombre;
+    this->apellido = apellido;
     this->carrera = carrera;
+    this->fechaIngreso = fechaIngreso;
 }
 
+// Destructor
 Alumno::~Alumno() {
-
+    // nada especial que liberar
 }
 
-int Alumno::getEdad() {
-    return edad;
-}
+// Getters
+int Alumno::getId() { return id; }
+string Alumno::getNombre() { return nombre; }
+string Alumno::getApellido() { return apellido; }
+string Alumno::getCarrera() { return carrera; }
+string Alumno::getFechaIngreso() { return fechaIngreso; }
 
+// Setters
+void Alumno::setId(int id) { this->id = id; }
+void Alumno::setNombre(string nombre) { this->nombre = nombre; }
+void Alumno::setApellido(string apellido) { this->apellido = apellido; }
+void Alumno::setCarrera(string carrera) { this->carrera = carrera; }
+void Alumno::setFechaIngreso(string fechaIngreso) { this->fechaIngreso = fechaIngreso; }
 
-string Alumno::getNombre() {
-    return nombre;
-}
-
-
-string Alumno::getCarrera() {
-    return carrera;
-}
-
-
-void Alumno::setEdad(int edad) {
-    this->edad = edad;
-}
-
-
-void Alumno::setNombre(string nombre) {
-    this->nombre = nombre;
-}
-
-
-void Alumno::setCarrera(string carrera) {
-    this->carrera = carrera;
-}
-
-
+// Mostrar información
 void Alumno::mostrar() {
-    cout << "Nombre: " << nombre
-         << " | Edad: " << edad
-         << " | Carrera: " << carrera << endl;
+    cout << "ID: " << id
+         << " | Nombre: " << nombre
+         << " | Apellido: " << apellido
+         << " | Carrera: " << carrera
+         << " | Fecha de ingreso: " << fechaIngreso
+         << endl;
 }
+
