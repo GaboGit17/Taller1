@@ -27,5 +27,7 @@ public:
     void recorrer(int id);
 
     void eliminar(int id);
+
+    void porCarrera(string carrera);
 };
 

@@ -72,5 +72,25 @@ void ListAlumnos::eliminar(int id) {
     }
 }
 
+void ListAlumnos::porCarrera(string carrera) {
+    if (cabeza == nullptr) {
+        cout << "No se encontro alumnos en esa carrera\n";
+        return;
+    }
+    bool encontrado = false;
+
+    for (Nodo* actual = cabeza; actual != nullptr; actual = actual->siguiente) {
+        if (actual->alumno.getCarrera() == carrera) {
+            actual->alumno.mostrar();
+            encontrado = true;
+        }
+    }
+    if (!encontrado) {
+        cout << "No se encontro al alumno con esa carrera\n";
+    }
+
+}
+
+
 
 

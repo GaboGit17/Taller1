@@ -25,7 +25,7 @@ public:
     ~ListaCursos();
 
     void insertar(Curso c);
-    Curso* buscarPorId(int idCurso);
+    void buscarPorId(int idCurso);
     void eliminarPorId(int idCurso);
     void mostrarTodos();
 };

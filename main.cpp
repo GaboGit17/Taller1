@@ -6,8 +6,12 @@
 #include <ostream>
 
 #include "Alumno.h"
+#include "ListaInscripciones.h"
+#include "ListaCursos.h"
 #include "ListAlumnos.h"
 ListAlumnos lista;
+ListaCursos listaCurso;
+ListaInscripciones listaInscripciones;
 
 void manejarAlumnos() {
     bool salir = false;
@@ -66,6 +70,7 @@ void manejarAlumnos() {
                 cout << "Ingrese ID" << endl;
                 cin >> id;
                 lista.eliminar(id);
+                listaInscripciones.eliminarPorAlumno(id);
 
                 break;
             }
@@ -82,10 +87,108 @@ void manejarAlumnos() {
 }
 
 void manejarInscripciones() {
+    bool salir = false;
+    while (!salir) {
+        cout << "1. Insccribir Alumno a un Curso\n";
+        cout << "2. Eliminar un Alumno de un Cruso\n";
+        cout << "0. Salir\n";
+        int opcion;
+        cout << "Selecciona opcion:" << endl;
+        cin >> opcion;
+        while (opcion < 0 || opcion > 3) {
+            cout << "Opcion invalida" << endl;
+            cout << "Selecciona opcion:" << endl;
+            cin >> opcion;
+        }
+        switch (opcion) {
+            case 1: {
+                int idCurso;
+                int idAlumno;
+                cout << "Ingresa el ID del Curso: ";
+                cin >> idCurso;
+                cout << "Ingresa el ID del alumno: ";
+                cin >> idAlumno;
+                listaInscripciones.inscribir(idAlumno, idCurso);
+
+                break;
+            }
+            case 2: {
+
+                break;
+
+            }
+            case 0: {
+                salir = true;
+                cout << "Saliendo de menu alumno..." << endl;
+                break;
+            }
+
+        }
+
+    }
 
 }
 
 void manejarCursos() {
+    bool salir = false;
+    while (!salir) {
+        cout<<"1. Crear un curso" << endl;
+        cout<<"2. Buscar un curso" << endl;
+        cout<<"3. Eliminar un curso" << endl;
+        cout<<"0. Salir" << endl;
+        int opcion;
+        cout << "Selecciona opcion:" << endl;
+        cin >> opcion;
+        while (opcion < 0 || opcion > 3) {
+            cout << "Opcion invalida" << endl;
+            cout << "Selecciona opcion:" << endl;
+            cin >> opcion;
+        }
+        switch (opcion) {
+            case 1: {
+                int id, cantMax;
+                string nombre, carrera, profesor;
+                cout << "Ingrese nombre del curso: ";
+                cin >> nombre;
+                cout << "Ingrese el ID del curso: ";
+                cin >> id;
+                cout << "Ingrese carrera del curso: ";
+                cin >> carrera;
+                cout << "Ingrese profesor del curso: ";
+                cin >> profesor;
+                cout << "Ingrese cantidad Max de alumnos: ";
+                cin >> cantMax;
+                Curso nuevo(id,nombre,cantMax,carrera,profesor);
+                listaCurso.insertar(nuevo);
+
+                break;
+            }
+            case 2: {
+                int id;
+                cout << "Ingrese ID del curso: ";
+                cin >> id;
+                listaCurso.buscarPorId(id);
+
+                break;
+            }
+            case 3: {
+                int id;
+                cout << "Ingrese ID del curso: ";
+                cin >> id;
+                listaCurso.eliminarPorId(id);
+                listaInscripciones.eliminarPorCurso(id);
+                break;
+
+            }
+            case 0: {
+                salir = true;
+                cout << "Saliendo de menu curso..." << endl;
+                break;
+
+            }
+        }
+
+    }
 
 }
 
@@ -94,6 +197,58 @@ void manejarNotas() {
 }
 
 void consultasReportes() {
+    bool salir = false;
+    while (!salir) {
+        cout << "1. Obtener todos los alumnos de una carrera\n";
+        cout << "2. Obtener todos los cursos en los que un alumno esta inscrito\n";
+        cout << "3. Calcular el promedio de notas de un alumno por curso\n";
+        cout << "4. Calcular promedio general de un alumno\n";
+        cout << "0. Salir" << endl;
+        int opcion;
+        cout << "Selecciona opcion:" << endl;
+        cin >> opcion;
+        while (opcion < 0 || opcion > 4) {
+            cout << "Opcion invalida" << endl;
+            cout << "Selecciona opcion:" << endl;
+            cin >> opcion;
+        }
+        switch (opcion) {
+            case 1: {
+                string carrera;
+                cout << "Ingrese carrera: ";
+                cin >> carrera;
+                lista.porCarrera(carrera);
+
+                break;
+
+            }
+            case 2: {
+                int id;
+                cout << "Ingrese ID del Alumno: ";
+                cin >> id;
+                listaInscripciones.mostrarCursosDeAlumno(id);
+
+                break;
+
+            }
+            case 3: {
+
+                break;
+            }
+            case 4: {
+
+                break;
+
+            }
+            case 0: {
+
+                salir = true;
+                cout << "Saliendo de menu curso..." << endl;
+                break;
+            }
+        }
+
+    }
 
 }
 

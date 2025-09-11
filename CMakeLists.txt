@@ -12,4 +12,6 @@ add_executable(Taller1
         Curso.h
         ListaCursos.cpp
         ListaCursos.h
+        ListaInscripciones.cpp
+        ListaInscripciones.h
 )

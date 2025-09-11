@@ -4,6 +4,8 @@
 
 #include "ListaCursos.h"
 
+#include "ListAlumnos.h"
+
 
 ListaCursos::ListaCursos() : cabeza(nullptr) {}
 
@@ -32,15 +34,22 @@ void ListaCursos::insertar(Curso c) {
 }
 
 
-Curso* ListaCursos::buscarPorId(int idCurso) {
-    NodoCurso* actual = cabeza;
-    while (actual) {
+void ListaCursos::buscarPorId(int idCurso) {
+    bool encontrado = false;
+    for (NodoCurso* actual = cabeza; actual; actual = actual->siguiente) {
         if (actual->curso.getId() == idCurso) {
-            return &(actual->curso);
+            cout << "Curso con ID: " << idCurso << " encontrado\n" << endl;
+            encontrado = true;
+            actual->curso.mostrar();
+            break;
         }
-        actual = actual->siguiente;
+
+
     }
-    return nullptr;
+    if (!encontrado) {
+        cout << "No se encontro al Curso con ID\n" << idCurso << endl;
+    }
+
 }
 
 
