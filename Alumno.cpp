@@ -19,7 +19,7 @@ Alumno::Alumno(int id, string nombre, string apellido, string carrera, string fe
 
 // Destructor
 Alumno::~Alumno() {
-    // nada especial que liberar
+
 }
 
 // Getters

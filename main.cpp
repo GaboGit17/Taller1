@@ -51,7 +51,10 @@ void manejarAlumnos() {
                 break;
             }
             case 2: {
+                string nombre;
                 int id;
+                cout << "Ingrese el nombre";
+                cin >> nombre;
                 cout << "Ingrese ID" << endl;
                 cin >> id;
                 lista.recorrer(id);

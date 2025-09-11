@@ -8,4 +8,8 @@ add_executable(Taller1
         Alumno.cpp
         ListAlumnos.cpp
         ListAlumnos.h
+        Curso.cpp
+        Curso.h
+        ListaCursos.cpp
+        ListaCursos.h
 )
