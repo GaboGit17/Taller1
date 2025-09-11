@@ -8,10 +8,18 @@
 #include <iostream>
 using namespace std;
 
-struct Nodo {
+class Nodo {
+private:
     Alumno alumno;
     Nodo* siguiente;
+
+public:
     Nodo(Alumno a) : alumno(a), siguiente(nullptr) {}
+
+    Alumno& getAlumno() { return alumno; }
+    Nodo* getSiguiente() { return siguiente; }
+
+    void setSiguiente(Nodo* nodo) { siguiente = nodo; }
 };
 
 class ListAlumnos {
@@ -23,11 +31,9 @@ public:
     ~ListAlumnos();
 
     void insertar(Alumno a);
-
     void recorrer(int id);
-
     void eliminar(int id);
-
     void porCarrera(string carrera);
 };
+
 

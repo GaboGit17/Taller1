@@ -4,19 +4,16 @@
 
 #include "ListAlumnos.h"
 
-// Constructor
 ListAlumnos::ListAlumnos() : cabeza(nullptr) {}
-
 
 ListAlumnos::~ListAlumnos() {
     Nodo* actual = cabeza;
     while (actual != nullptr) {
         Nodo* temp = actual;
-        actual = actual->siguiente;
+        actual = actual->getSiguiente();
         delete temp;
     }
 }
-
 
 void ListAlumnos::insertar(Alumno a) {
     Nodo* nuevo = new Nodo(a);
@@ -24,44 +21,44 @@ void ListAlumnos::insertar(Alumno a) {
         cabeza = nuevo;
     } else {
         Nodo* actual = cabeza;
-        while (actual->siguiente) {
-            actual = actual->siguiente;
+        while (actual->getSiguiente()) {
+            actual = actual->getSiguiente();
         }
-        actual->siguiente = nuevo;
+        actual->setSiguiente(nuevo);
     }
 }
 
 void ListAlumnos::recorrer(int id) {
     bool encontrado = false;
 
-    for (Nodo* actual = cabeza; actual != nullptr; actual = actual->siguiente) {
-        if (actual->alumno.getId() == id) {
+    for (Nodo* actual = cabeza; actual != nullptr; actual = actual->getSiguiente()) {
+        if (actual->getAlumno().getId() == id) {
             cout << "Alumno con ID " << id << " encontrado\n" << endl;
-            actual->alumno.mostrar();
+            actual->getAlumno().mostrar();
             encontrado = true;
             break;
         }
     }
 
     if (!encontrado) {
-        cout << "No se encontro al alumno con ID\n" << id << endl;
+        cout << "No se encontro al alumno con ID " << id << endl;
     }
 }
 
 void ListAlumnos::eliminar(int id) {
     if (cabeza == nullptr) {
-        cout << "No se encontro al alumno con ID\n" << id << endl;
+        cout << "No se encontro al alumno con ID " << id << endl;
         return;
     }
 
     Nodo* anterior = nullptr;
-    for (Nodo* actual = cabeza; actual != nullptr; actual = actual->siguiente) {
-        if (actual->alumno.getId() == id) {
+    for (Nodo* actual = cabeza; actual != nullptr; actual = actual->getSiguiente()) {
+        if (actual->getAlumno().getId() == id) {
 
             if (anterior == nullptr) {
-                cabeza = actual->siguiente;
+                cabeza = actual->getSiguiente();
             } else {
-                anterior->siguiente = actual->siguiente;
+                anterior->setSiguiente(actual->getSiguiente());
             }
 
             delete actual;
@@ -79,17 +76,17 @@ void ListAlumnos::porCarrera(string carrera) {
     }
     bool encontrado = false;
 
-    for (Nodo* actual = cabeza; actual != nullptr; actual = actual->siguiente) {
-        if (actual->alumno.getCarrera() == carrera) {
-            actual->alumno.mostrar();
+    for (Nodo* actual = cabeza; actual != nullptr; actual = actual->getSiguiente()) {
+        if (actual->getAlumno().getCarrera() == carrera) {
+            actual->getAlumno().mostrar();
             encontrado = true;
         }
     }
     if (!encontrado) {
         cout << "No se encontro al alumno con esa carrera\n";
     }
-
 }
+
 
 
 

@@ -4,25 +4,21 @@
 
 #include "ListaInscripciones.h"
 
-
 ListaInscripciones::ListaInscripciones() : cabeza(nullptr) {}
-
 
 ListaInscripciones::~ListaInscripciones() {
     NodoInscripcion* actual = cabeza;
     while (actual) {
         NodoInscripcion* temp = actual;
-        actual = actual->siguiente;
+        actual = actual->getSiguiente();
         delete temp;
     }
 }
 
-
 void ListaInscripciones::inscribir(int idAlumno, int idCurso) {
-
-    for (NodoInscripcion* actual = cabeza; actual; actual = actual->siguiente) {
-        if (actual->idAlumno == idAlumno && actual->idCurso == idCurso) {
-            cout << " Alumno " << idAlumno << " ya está inscrito en curso " << idCurso << endl;
+    for (NodoInscripcion* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getIdAlumno() == idAlumno && actual->getIdCurso() == idCurso) {
+            cout << " Alumno " << idAlumno << " ya esta inscrito en curso " << idCurso << endl;
             return;
         }
     }
@@ -32,8 +28,8 @@ void ListaInscripciones::inscribir(int idAlumno, int idCurso) {
         cabeza = nuevo;
     } else {
         NodoInscripcion* actual = cabeza;
-        while (actual->siguiente) actual = actual->siguiente;
-        actual->siguiente = nuevo;
+        while (actual->getSiguiente()) actual = actual->getSiguiente();
+        actual->setSiguiente(nuevo);
     }
 
     cout << " Alumno " << idAlumno << " inscrito en curso " << idCurso << endl;
@@ -44,23 +40,22 @@ void ListaInscripciones::eliminarPorAlumno(int idAlumno) {
     NodoInscripcion* actual = cabeza;
 
     while (actual) {
-        if (actual->idAlumno == idAlumno) {
+        if (actual->getIdAlumno() == idAlumno) {
             NodoInscripcion* temp = actual;
             if (anterior == nullptr) {
-                cabeza = actual->siguiente;
+                cabeza = actual->getSiguiente();
                 actual = cabeza;
             } else {
-                anterior->siguiente = actual->siguiente;
-                actual = anterior->siguiente;
+                anterior->setSiguiente(actual->getSiguiente());
+                actual = anterior->getSiguiente();
             }
             delete temp;
         } else {
             anterior = actual;
-            actual = actual->siguiente;
+            actual = actual->getSiguiente();
         }
     }
 }
-
 
 void ListaInscripciones::eliminar(int idAlumno, int idCurso) {
     if (!cabeza) {
@@ -69,22 +64,20 @@ void ListaInscripciones::eliminar(int idAlumno, int idCurso) {
     }
 
     NodoInscripcion* anterior = nullptr;
-    for (NodoInscripcion* actual = cabeza; actual; actual = actual->siguiente) {
-        if (actual->idAlumno == idAlumno && actual->idCurso == idCurso) {
+    for (NodoInscripcion* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getIdAlumno() == idAlumno && actual->getIdCurso() == idCurso) {
             if (anterior == nullptr) {
-                cabeza = actual->siguiente;
+                cabeza = actual->getSiguiente();
             } else {
-                anterior->siguiente = actual->siguiente;
+                anterior->setSiguiente(actual->getSiguiente());
             }
             delete actual;
-            cout << "Inscripción eliminada: Alumno " << idAlumno
-                 << " en Curso " << idCurso << endl;
+            cout << "Inscripción eliminada: Alumno " << idAlumno << " en Curso " << idCurso << endl;
             return;
         }
         anterior = actual;
     }
-    cout << "No se encontró inscripción de Alumno " << idAlumno
-         << " en Curso " << idCurso << endl;
+    cout << "No se encontró inscripción de Alumno " << idAlumno << " en Curso " << idCurso << endl;
 }
 
 void ListaInscripciones::eliminarPorCurso(int idCurso) {
@@ -96,54 +89,41 @@ void ListaInscripciones::eliminarPorCurso(int idCurso) {
     NodoInscripcion* anterior = nullptr;
 
     for (NodoInscripcion* actual = cabeza; actual != nullptr; ) {
-        if (actual->idCurso == idCurso) {
+        if (actual->getIdCurso() == idCurso) {
             NodoInscripcion* temp = actual;
 
-
             if (anterior == nullptr) {
-                cabeza = actual->siguiente;
+                cabeza = actual->getSiguiente();
                 actual = cabeza;
             } else {
-                anterior->siguiente = actual->siguiente;
-                actual = anterior->siguiente;
+                anterior->setSiguiente(actual->getSiguiente());
+                actual = anterior->getSiguiente();
             }
 
             delete temp;
         } else {
             anterior = actual;
-            actual = actual->siguiente;
+            actual = actual->getSiguiente();
         }
     }
 
     cout << " Se eliminaron todas las inscripciones del curso con ID " << idCurso << endl;
 }
 
-// Agregar nota
 void ListaInscripciones::agregarNota(int idAlumno, int idCurso, float nota) {
-    for (NodoInscripcion* actual = cabeza; actual; actual = actual->siguiente) {
-        if (actual->idAlumno == idAlumno && actual->idCurso == idCurso) {
-            if (nota >= 1.0 && nota <= 7.0) {
-                actual->notas.push_back(nota);
-                cout << " Nota " << nota << " registrada para Alumno "
-                     << idAlumno << " en Curso " << idCurso << endl;
-            } else {
-                cout << " Nota inválida. Debe estar entre 1.0 y 7.0\n";
-            }
-            return;
+    for (NodoInscripcion* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getIdAlumno() == idAlumno && actual->getIdCurso() == idCurso) {
+            actual->agregarNota(nota);
         }
     }
-    cout << "No se encontró inscripción para Alumno " << idAlumno
-         << " en Curso " << idCurso << endl;
+    cout << "No se encontró inscripción para Alumno " << idAlumno << " en Curso " << idCurso << endl;
 }
 
-
-
-// Mostrar cursos en los que está inscrito un alumno
 void ListaInscripciones::mostrarCursosDeAlumno(int idAlumno) {
     bool encontrado = false;
-    for (NodoInscripcion* actual = cabeza; actual; actual = actual->siguiente) {
-        if (actual->idAlumno == idAlumno) {
-            cout << " Alumno Inscrito en Curso ID: " << actual->idCurso << endl;
+    for (NodoInscripcion* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getIdAlumno() == idAlumno) {
+            cout << " Alumno Inscrito en Curso ID: " << actual->getIdCurso() << endl;
             encontrado = true;
         }
     }
@@ -152,12 +132,11 @@ void ListaInscripciones::mostrarCursosDeAlumno(int idAlumno) {
     }
 }
 
-// Mostrar alumnos inscritos en un curso
 void ListaInscripciones::mostrarAlumnosDeCurso(int idCurso) {
     bool encontrado = false;
-    for (NodoInscripcion* actual = cabeza; actual; actual = actual->siguiente) {
-        if (actual->idCurso == idCurso) {
-            cout << "Alumno ID: " << actual->idAlumno << endl;
+    for (NodoInscripcion* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getIdCurso() == idCurso) {
+            cout << "Alumno ID: " << actual->getIdAlumno() << endl;
             encontrado = true;
         }
     }
@@ -165,4 +144,3 @@ void ListaInscripciones::mostrarAlumnosDeCurso(int idCurso) {
         cout << "No hay alumnos inscritos en curso " << idCurso << endl;
     }
 }
-

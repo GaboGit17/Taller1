@@ -7,14 +7,20 @@
 #include <iostream>
 using namespace std;
 
-
-struct NodoCurso {
+class NodoCurso {
+private:
     Curso curso;
     NodoCurso* siguiente;
 
+public:
     NodoCurso(Curso c) : curso(c), siguiente(nullptr) {}
-};
 
+    Curso& getCurso() { return curso; }
+
+    NodoCurso* getSiguiente() { return siguiente; }
+
+    void setSiguiente(NodoCurso* nodo) { siguiente = nodo; }
+};
 
 class ListaCursos {
 private:
@@ -29,5 +35,6 @@ public:
     void eliminarPorId(int idCurso);
     void mostrarTodos();
 };
+
 
 

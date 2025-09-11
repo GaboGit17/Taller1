@@ -3,22 +3,18 @@
 //
 
 #include "ListaCursos.h"
-
 #include "ListAlumnos.h"
 
-
 ListaCursos::ListaCursos() : cabeza(nullptr) {}
-
 
 ListaCursos::~ListaCursos() {
     NodoCurso* actual = cabeza;
     while (actual != nullptr) {
         NodoCurso* temp = actual;
-        actual = actual->siguiente;
+        actual = actual->getSiguiente();
         delete temp;
     }
 }
-
 
 void ListaCursos::insertar(Curso c) {
     NodoCurso* nuevo = new NodoCurso(c);
@@ -26,32 +22,27 @@ void ListaCursos::insertar(Curso c) {
         cabeza = nuevo;
     } else {
         NodoCurso* actual = cabeza;
-        while (actual->siguiente) {
-            actual = actual->siguiente;
+        while (actual->getSiguiente()) {
+            actual = actual->getSiguiente();
         }
-        actual->siguiente = nuevo;
+        actual->setSiguiente(nuevo);
     }
 }
-
 
 void ListaCursos::buscarPorId(int idCurso) {
     bool encontrado = false;
-    for (NodoCurso* actual = cabeza; actual; actual = actual->siguiente) {
-        if (actual->curso.getId() == idCurso) {
+    for (NodoCurso* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getCurso().getId() == idCurso) {
             cout << "Curso con ID: " << idCurso << " encontrado\n" << endl;
             encontrado = true;
-            actual->curso.mostrar();
+            actual->getCurso().mostrar();
             break;
         }
-
-
     }
     if (!encontrado) {
-        cout << "No se encontro al Curso con ID\n" << idCurso << endl;
+        cout << "No se encontro el Curso con ID " << idCurso << endl;
     }
-
 }
-
 
 void ListaCursos::eliminarPorId(int idCurso) {
     if (cabeza == nullptr) {
@@ -61,13 +52,13 @@ void ListaCursos::eliminarPorId(int idCurso) {
 
     NodoCurso* anterior = nullptr;
 
-    for (NodoCurso* actual = cabeza; actual != nullptr; actual = actual->siguiente) {
-        if (actual->curso.getId() == idCurso) {
+    for (NodoCurso* actual = cabeza; actual != nullptr; actual = actual->getSiguiente()) {
+        if (actual->getCurso().getId() == idCurso) {
 
             if (anterior == nullptr) {
-                cabeza = actual->siguiente;
+                cabeza = actual->getSiguiente();
             } else {
-                anterior->siguiente = actual->siguiente;
+                anterior->setSiguiente(actual->getSiguiente());
             }
 
             delete actual;
@@ -80,14 +71,12 @@ void ListaCursos::eliminarPorId(int idCurso) {
     cout << "No se encontro el curso con ID " << idCurso << endl;
 }
 
-
 void ListaCursos::mostrarTodos() {
-
     if (!cabeza) {
         cout << "No hay cursos registrados.\n";
         return;
     }
-    for (NodoCurso* actual = cabeza; actual != nullptr; actual = actual->siguiente) {
-        actual->curso.mostrar();
+    for (NodoCurso* actual = cabeza; actual != nullptr; actual = actual->getSiguiente()) {
+        actual->getCurso().mostrar();
     }
 }

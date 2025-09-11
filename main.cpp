@@ -113,6 +113,14 @@ void manejarInscripciones() {
                 break;
             }
             case 2: {
+                int idAlumno;
+                int idCurso;
+                cout << "Ingresa el ID del Alumno: ";
+                cin >> idAlumno;
+                cout << "Ingresa el ID del Curso: ";
+                cin >> idCurso;
+                listaInscripciones.eliminar(idAlumno, idCurso);
+
 
                 break;
 
@@ -193,6 +201,45 @@ void manejarCursos() {
 }
 
 void manejarNotas() {
+    bool salir = false;
+    while (!salir) {
+        cout << "1. Ingresar Notas a un Alumno" << endl;
+        cout << "0. Salir" << endl;
+        int opcion;
+        cout << "Selecciona opcion:" << endl;
+        cin >> opcion;
+        while (opcion < 0 || opcion > 3) {
+            cout << "Opcion invalida" << endl;
+            cout << "Selecciona opcion:" << endl;
+            cin >> opcion;
+        }
+        switch (opcion) {
+            case 1: {
+                int idAlumno, idCurso;
+                float nota;
+                cout << "Ingrese el ID del Alumno: ";
+                cin >> idAlumno;
+                cout << "Ingrese el ID del Curso: ";
+                cin >> idCurso;
+                cout << "Ingrese la Nota del curso: ";
+                cin >> nota;
+                while (nota < 1.0 || nota > 7.0) {
+                    cout << "Nota invalida" << endl;
+                    cout << "Ingrese nuevamente la nota:" << endl;
+                    cin >> nota;
+                }
+
+
+                break;
+            }
+            case 0: {
+
+                break;
+            }
+        }
+    }
+
+
 
 }
 
