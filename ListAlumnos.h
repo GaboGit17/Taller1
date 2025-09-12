@@ -32,6 +32,7 @@ public:
 
     void insertar(Alumno a);
     void recorrer(int id);
+    void recorrerNombre(string nombre);
     void eliminar(int id);
     void porCarrera(string carrera);
 };

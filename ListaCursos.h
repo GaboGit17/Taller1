@@ -32,6 +32,7 @@ public:
 
     void insertar(Curso c);
     void buscarPorId(int idCurso);
+    void buscarPorNombre(string nombre);
     void eliminarPorId(int idCurso);
     void mostrarTodos();
 };

@@ -45,6 +45,20 @@ void ListAlumnos::recorrer(int id) {
     }
 }
 
+void ListAlumnos::recorrerNombre(string nombre) {
+    bool encontrado = false;
+    for (Nodo*actual = cabeza; actual != nullptr; actual = actual->getSiguiente()) {
+        if (actual->getAlumno().getNombre() == nombre) {
+            encontrado = true;
+        }
+        actual->getAlumno().mostrar();
+    }
+    if (!encontrado) {
+        cout << "No se encontro(aron) alumnos con ese Nombre" << endl;
+    }
+}
+
+
 void ListAlumnos::eliminar(int id) {
     if (cabeza == nullptr) {
         cout << "No se encontro al alumno con ID " << id << endl;

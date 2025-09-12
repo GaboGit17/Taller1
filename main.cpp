@@ -76,12 +76,30 @@ void manejarAlumnos() {
             }
             case 2: {
                 string nombre;
-                int id;
-                cout << "Ingrese el nombre";
-                cin >> nombre;
-                cout << "Ingrese ID" << endl;
-                cin >> id;
-                lista.recorrer(id);
+                int id, opcion;
+                cout << "Desea buscar por nombre o ID?" << endl;
+                cout << "1. Nombre" << endl;
+                cout << "2. ID" << endl;
+                cin >> opcion;
+                while (opcion < 1 || opcion > 2) {
+                    cout << "Desea buscar por nombre o ID?" << endl;
+                    cout << "1. Nombre" << endl;
+                    cout << "2. ID" << endl;
+                    cin >> opcion;
+                }
+                if (opcion == 1) {
+                    cout << "Ingrese el nombre:\n";
+                    cin >> nombre;
+                    lista.recorrerNombre(nombre);
+
+
+                }else if (opcion == 2) {
+                    cout << "Ingrese ID" << endl;
+                    cin >> id;
+                    lista.recorrer(id);
+
+                }
+
 
                 break;
             }
@@ -192,10 +210,30 @@ void manejarCursos() {
                 break;
             }
             case 2: {
-                int id;
-                cout << "Ingrese ID del curso: ";
-                cin >> id;
-                listaCurso.buscarPorId(id);
+                int id, opcion;
+                string nombre;
+                cout << "Desea Buscar Curso por nombre o por ID?" << endl;
+                cout << "1. Nombre " << endl;
+                cout << "2. ID" << endl;
+                cin >> opcion;
+                while (opcion < 1 || opcion > 2) {
+                    cout << "Desea Buscar Curso por nombre o por ID?" << endl;
+                    cout << "1. Nombre " << endl;
+                    cout << "2. ID" << endl;
+                    cin >> opcion;
+                }
+                if (opcion == 1) {
+                    cout << "Ingrese nombre del curso" << endl;
+                    cin >> nombre;
+                    listaCurso.buscarPorNombre(nombre);
+
+                }else if (opcion == 2) {
+                    cout << "Ingrese ID del curso: ";
+                    cin >> id;
+                    listaCurso.buscarPorId(id);
+
+                }
+
 
                 break;
             }

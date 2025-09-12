@@ -44,6 +44,21 @@ void ListaCursos::buscarPorId(int idCurso) {
     }
 }
 
+void ListaCursos::buscarPorNombre(string nombre) {
+    bool encontrado = false;
+    for (NodoCurso* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getCurso().getNombre() == nombre) {
+            encontrado = true;
+        }
+        actual->getCurso().mostrar();
+
+    }
+    if (!encontrado) {
+        cout << "No se encontro(aron) Cursos con ese nombre" << endl;
+    }
+}
+
+
 void ListaCursos::eliminarPorId(int idCurso) {
     if (cabeza == nullptr) {
         cout << "No se encontro el curso con ID " << idCurso << endl;
