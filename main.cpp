@@ -37,18 +37,38 @@ void manejarAlumnos() {
 
                 cout << "Ingresa el ID del alumno: ";
                 cin >> id;
+                while (id < 0 ) {
+                    cout << "Ingrese un valor de ID valido" << endl;
+                    cin >> id;
+                }
 
                 cout << "Ingresa el nombre del alumno: ";
                 cin >> nombre;
+                while (nombre.empty()) {
+                    cout << "Ingrese un nombre valido " << endl;
+                    cin >> nombre;
+                }
 
                 cout << "Ingresa el apellido del alumno: ";
                 cin >> apellido;
+                while (apellido.empty()) {
+                    cout << "Ingrese un apellido valido" << endl;
+                    cin >> apellido;
+                }
 
                 cout << "Ingresa la carrera del alumno: ";
                 cin >> carrera;
+                while (carrera.empty()) {
+                    cout << "Ingrese una carrera valida" << endl;
+                    cin >> carrera;
+                }
 
                 cout << "Ingresa la fecha de ingreso (D-M-A): ";
                 cin >> fechaIngreso;
+                while (fechaIngreso.empty()) {
+                    cout << "Ingrese una fecha valida" << endl;
+                    cin >> fechaIngreso;
+                }
                 Alumno nuevo(id, nombre, apellido, carrera, fechaIngreso);
                 lista.insertar(nuevo);
 
@@ -228,13 +248,14 @@ void manejarNotas() {
                     cout << "Ingrese nuevamente la nota:" << endl;
                     cin >> nota;
                 }
-
-
+                listaInscripciones.agregarNota(idAlumno,idCurso,nota);
                 break;
             }
             case 0: {
-
+                salir = true;
+                cout << "Saliendo de menu curso..." << endl;
                 break;
+
             }
         }
     }
@@ -252,17 +273,17 @@ void consultasReportes() {
         cout << "4. Calcular promedio general de un alumno\n";
         cout << "0. Salir" << endl;
         int opcion;
-        cout << "Selecciona opcion:" << endl;
+        cout << " Selecciona opcion:" << endl;
         cin >> opcion;
         while (opcion < 0 || opcion > 4) {
-            cout << "Opcion invalida" << endl;
-            cout << "Selecciona opcion:" << endl;
+            cout << " Opcion invalida" << endl;
+            cout << " Selecciona opcion:" << endl;
             cin >> opcion;
         }
         switch (opcion) {
             case 1: {
                 string carrera;
-                cout << "Ingrese carrera: ";
+                cout << " Ingrese carrera: ";
                 cin >> carrera;
                 lista.porCarrera(carrera);
 
@@ -279,6 +300,12 @@ void consultasReportes() {
 
             }
             case 3: {
+                int idAlumno, idCurso;
+                cout << "Ingrese ID del Curso: ";
+                cin >> idCurso;
+                cout << "Ingrese ID del Alumno: ";
+                cin >> idAlumno;
+                listaInscripciones.PromedioAlumnoCurso(idAlumno,idCurso);
 
                 break;
             }

@@ -42,6 +42,7 @@ public:
     void agregarNota(int idAlumno, int idCurso, float nota);
     void eliminarPorAlumno(int idAlumno);
     void eliminarPorCurso(int idCurso);
+    void PromedioAlumnoCurso(int idAlumno, int idCurso);
 
     void mostrarCursosDeAlumno(int idAlumno);
     void mostrarAlumnosDeCurso(int idCurso);

@@ -59,7 +59,7 @@ void ListaInscripciones::eliminarPorAlumno(int idAlumno) {
 
 void ListaInscripciones::eliminar(int idAlumno, int idCurso) {
     if (!cabeza) {
-        cout << "No hay inscripciones registradas.\n";
+        cout << "No hay inscripciones registradas\n";
         return;
     }
 
@@ -77,7 +77,7 @@ void ListaInscripciones::eliminar(int idAlumno, int idCurso) {
         }
         anterior = actual;
     }
-    cout << "No se encontró inscripción de Alumno " << idAlumno << " en Curso " << idCurso << endl;
+    cout << "No se encontró inscripcion de Alumno " << idAlumno << " en Curso " << idCurso << endl;
 }
 
 void ListaInscripciones::eliminarPorCurso(int idCurso) {
@@ -107,16 +107,22 @@ void ListaInscripciones::eliminarPorCurso(int idCurso) {
         }
     }
 
-    cout << " Se eliminaron todas las inscripciones del curso con ID " << idCurso << endl;
+    cout << " Se eliminaron todas las inscripciones del curso con ID: " << idCurso << endl;
 }
 
 void ListaInscripciones::agregarNota(int idAlumno, int idCurso, float nota) {
+    bool agregado = false;
     for (NodoInscripcion* actual = cabeza; actual; actual = actual->getSiguiente()) {
         if (actual->getIdAlumno() == idAlumno && actual->getIdCurso() == idCurso) {
             actual->agregarNota(nota);
+            cout << "Nota agregada" << endl;
+            agregado = true;
         }
     }
-    cout << "No se encontró inscripción para Alumno " << idAlumno << " en Curso " << idCurso << endl;
+    if (!agregado) {
+        cout << "No se encontró inscripción para Alumno: " << idAlumno << " en Curso: " << idCurso << endl;
+    }
+
 }
 
 void ListaInscripciones::mostrarCursosDeAlumno(int idAlumno) {
@@ -128,7 +134,7 @@ void ListaInscripciones::mostrarCursosDeAlumno(int idAlumno) {
         }
     }
     if (!encontrado) {
-        cout << "Alumno " << idAlumno << " no está inscrito en ningún curso.\n";
+        cout << "Alumno " << idAlumno << " no esta inscrito en ningún curso\n";
     }
 }
 
@@ -143,4 +149,30 @@ void ListaInscripciones::mostrarAlumnosDeCurso(int idCurso) {
     if (!encontrado) {
         cout << "No hay alumnos inscritos en curso " << idCurso << endl;
     }
+}
+
+void ListaInscripciones::PromedioAlumnoCurso(int idAlumno, int idCurso) {
+
+    for (NodoInscripcion* actual = cabeza; actual; actual = actual->getSiguiente()) {
+        if (actual->getIdCurso() == idCurso && actual->getIdAlumno() == idAlumno) {
+            vector<float> notas = actual->getNotas();
+
+            if (notas.empty()) {
+                cout << "El alumno no tiene notas" << endl;
+                return;
+            }
+
+            float suma = 0;
+            for (float nota : notas) {
+                suma += nota;
+
+            }
+            cout << "El promedio del alumno con ID: " << actual->getIdAlumno() << " es: " << suma/notas.size() << endl;
+            return;
+
+
+        }
+    }
+
+
 }
